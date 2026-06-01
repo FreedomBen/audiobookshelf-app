@@ -53,8 +53,6 @@
 </template>
 
 <script>
-import { Dialog } from '@capacitor/dialog'
-
 export default {
   props: {
     value: Boolean,
@@ -106,14 +104,6 @@ export default {
       this.$nextTick(() => this.$emit('change', { time: timeout, isChapterTime: false }))
     },
     async cancelSleepTimer() {
-      if (this.isAuto) {
-        const { value } = await Dialog.confirm({
-          title: 'Confirm',
-          message: this.$strings.MessageConfirmDisableAutoTimer
-        })
-        if (!value) return
-      }
-
       await this.$hapticsImpact()
       this.$emit('cancel')
       this.show = false
